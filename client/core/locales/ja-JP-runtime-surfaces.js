@@ -336,6 +336,14 @@
     '\u672c\u6b21\u9884\u7ea6\u5df2\u89e6\u53d1': '\u3053\u306e\u4e88\u7d04\u306f\u5b9f\u884c\u6e08\u307f\u3067\u3059',
     '\u672c\u6b21\u9884\u7ea6\u5df2\u89e6\u53d1\uff1b\u4fee\u6539\u4e3a\u5c06\u6765\u65f6\u95f4\u53ef\u91cd\u65b0\u9884\u7ea6': '\u3053\u306e\u4e88\u7d04\u306f\u5b9f\u884c\u6e08\u307f\u3067\u3059\u3002\u5c06\u6765\u306e\u6642\u523b\u306b\u5909\u66f4\u3059\u308c\u3070\u518d\u4e88\u7d04\u3067\u304d\u307e\u3059',
     '\u5230\u70b9\u89e6\u53d1\u4e00\u6b21\uff1b\u5931\u8d25\u6309\u8bbe\u7f6e\u91cd\u8bd5': '\u6307\u5b9a\u6642\u523b\u306b1\u56de\u5b9f\u884c\u3057\u3001\u5931\u6557\u6642\u306f\u8a2d\u5b9a\u306b\u5f93\u3063\u3066\u30ea\u30c8\u30e9\u30a4\u3057\u307e\u3059',
+    '本机 Runner 无法连接后台，请检查网络连接；恢复后会自动重连。' : 'ローカル Runner がサービスに接続できません。ネットワーク接続を確認してください。接続が戻ると自動的に再接続します。',
+    "本机 Runner 的设备登记未通过，请重新登录后重试。": "ローカル Runner のデバイス登録に失敗しました。再度サインインしてお試しください。",
+    "本机 Runner 已启动，但后台尚未确认上线，正在自动重连。": "ローカル Runner は起動しましたが、サービス側でまだ確認されていません。自動的に再接続します。",
+    "升级后的设备身份与旧 Runner 登记不一致，正在恢复本机连接。": "アップグレード後のデバイス ID が以前の Runner 登録と一致しません。ローカル接続を復旧しています。",
+    "本机 Runner 无法保存设备身份，请检查客户端数据目录的写入权限和磁盘空间。": "ローカル Runner がデバイス ID を保存できません。クライアントのデータディレクトリの書き込み権限と空き容量を確認してください。",
+    "本机 Runner 身份恢复失败，请联系管理员检查设备登记。": "ローカル Runner の ID を復旧できませんでした。管理者にデバイス登録を確認してもらってください。",
+    "本机 Runner 尚未启动，请检查客户端的工作目录设置后重新打开客户端。": "ローカル Runner は起動していません。クライアントの作業ディレクトリ設定を確認して再起動してください。",
+    "本机 Runner 正在连接后台，连接成功后会自动显示可用 Agent。": "ローカル Runner がサービスに接続中です。接続すると利用可能な Agent が表示されます。",
   };
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'ja-JP': Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages?.['ja-JP'], messages)) }));

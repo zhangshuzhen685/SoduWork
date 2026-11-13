@@ -6,6 +6,26 @@
   const ownerScope = () => String(global.SoduWorkAPI?.taskStorageKey?.('ops') || 'renderer');
   const esc = value => global.CloudEnvironments.esc(value);
   const translateDialog = node => global.SoduWorkI18n?.translateNode?.(node);
+  const translateText = value => global.SoduWorkI18n?.translateText?.(String(value || '')) || String(value || '');
+  /* Browser-native validation bubbles use the host OS language.  Set a
+     localized custom message so an English/Japanese/Korean client never
+     falls back to a Chinese browser popup. */
+  function bindValidation(form) {
+    if (!form) return;
+    form.querySelectorAll('input,select,textarea').forEach(control => {
+      const clear = () => control.setCustomValidity('');
+      control.addEventListener('invalid', () => {
+        const validity = control.validity || {};
+        const message = validity.valueMissing ? '请填写此字段。'
+          : validity.typeMismatch ? '请输入有效的地址。'
+            : (validity.badInput || validity.rangeUnderflow || validity.rangeOverflow || validity.stepMismatch ||
+              validity.patternMismatch || validity.tooLong || validity.tooShort) ? '请输入有效的值。' : '';
+        control.setCustomValidity(message ? translateText(message) : '');
+      });
+      control.addEventListener('input', clear);
+      control.addEventListener('change', clear);
+    });
+  }
   const isCurrent = node => active === node && owners.get(node) === ownerScope();
   function close() { if (busy || !active) return; active.close(); active.remove(); active = null; }
   function invalidate() { busy = false; if (active && owners.get(active) !== ownerScope()) { active.close(); active.remove(); active = null; } }
@@ -16,7 +36,7 @@
     node.innerHTML = '<form><header><span class="ce-dialog-icon">' + global.CloudEnvironments.icon + '</span><div><h2 id="ceDialogTitle">' + esc((title)) + '</h2><p' + (options.translateSubtitle === false ? ' translate="no"' : '') + '>' + esc(options.translateSubtitle === false ? String(subtitle ?? '') : (subtitle)) + '</p></div><button type="button" data-ce-dismiss aria-label="' + esc(('关闭')) + '">×</button></header><div class="ce-dialog-body">' + body + '<p class="ce-error" role="alert" hidden></p></div><footer><div class="ce-progress" data-ce-progress role="status" aria-live="polite" hidden><span class="ce-progress-spinner" aria-hidden="true"></span><span data-ce-progress-label></span></div><button type="button" data-ce-dismiss>' + esc(('取消')) + '</button><button type="submit" class="ce-primary">' + esc((submitLabel)) + '</button></footer></form>';
     node.querySelectorAll('[data-ce-dismiss]').forEach(button => button.addEventListener('click', close));
     node.addEventListener('cancel', event => { event.preventDefault(); close(); });
-    document.body.append(node); translateDialog(node); node.showModal(); return node;
+    document.body.append(node); bindValidation(node.querySelector('form')); translateDialog(node); node.showModal(); return node;
   }
   function checked(result, node) {
     if (!isCurrent(node)) throw Error(('账号或服务已切换，请重新打开云端环境'));

@@ -2537,6 +2537,8 @@
     '本次对话不再提示': '이 대화에서는 다시 표시하지 않음',
     '注释': '주석',
     '默认工作区': '기본 작업 공간',
+    '（沿用上一会话）': '（이전 대화 사용）', '（沿用上次选择）': '（마지막 선택 사용）',
+    '沿用上一会话': '이전 대화 사용', '沿用上次选择': '마지막 선택 사용',
     '选择本次会话的工作位置': '이 대화의 작업 위치 선택',
     '设置本次会话的权限': '이 대화의 권한 설정',
     '检查中': '확인 중',
@@ -8373,6 +8375,11 @@
     'Runner 安装已完成': 'Runner 설치가 완료되었습니다',
     'SSH 连接已验证；Runner 是否在线以下方检查结果为准。': 'SSH 연결을 확인했습니다. Runner의 온라인 상태는 아래 연결 확인 결과를 참고하세요.',
     '插件参数过长，请缩短后重试': '플러그인 입력이 너무 깁니다. 줄인 후 다시 시도하세요.',
+    "例如 192.0.2.20 或 dev.example.com": "예: 192.0.2.20 또는 dev.example.com",
+    "例如：我的开发电脑": "예: 개발용 컴퓨터",
+    "请填写此字段。": "이 필드를 입력하세요.",
+    "请输入有效的地址。": "유효한 주소를 입력하세요.",
+    "请输入有效的值。": "유효한 값을 입력하세요.",
   });
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'ko-KR': Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages['ko-KR'], messages)) }));

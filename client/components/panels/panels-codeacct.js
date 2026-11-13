@@ -57,6 +57,31 @@ window.addEventListener('soduwork-device-auth', () => {
 const _CA_ICON = '<svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>' +
   '<path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>';
 
+/*
+ * Code accounts is a legacy panel that builds its markup from string
+ * templates.  Keep an explicit translation pass here instead of relying
+ * solely on the global MutationObserver: re-renders replace the whole body
+ * while the locale can change between two async responses.
+ */
+function _caTranslate(root) {
+  try { window.SoduWorkI18n?.translateNode?.(root || document.getElementById('caPanel')); } catch (_) {}
+}
+
+function _caText(value) {
+  const text = String(value == null ? '' : value);
+  return window.SoduWorkI18n?.translateText?.(text) || text;
+}
+
+function _caError(error, fallback) {
+  const raw = typeof _humanErr === 'function' ? _humanErr(error, fallback) : (fallback || String(error || ''));
+  return _caText(raw);
+}
+
+window.addEventListener?.('soduwork-locale-change', () => {
+  const panel = document.getElementById('caPanel');
+  if (panel?.classList.contains('show')) _caTranslate(panel);
+});
+
 function openCodeAcctPanel() {
   _caSyncOwner();
   let p = document.getElementById('caPanel');
@@ -78,6 +103,7 @@ function openCodeAcctPanel() {
     if (typeof makeDraggable === 'function') makeDraggable(p, p.querySelector('.sch-head'));
   }
   p.classList.add('show');
+  _caTranslate(p);
   if (typeof expandForOverlay === 'function') expandForOverlay();
   _caLoad();
 }
@@ -94,7 +120,10 @@ async function _caLoad() {
   const box = document.getElementById('caBody');
   if (!box) return;
   const seq = ++_caLoadSeq, epoch = _caEpoch, owner = _caOwner;
-  if (!_caData) box.innerHTML = '<div class="ag-load"><i></i><i></i><i></i><span>正在读…</span></div>';
+  if (!_caData) {
+    box.innerHTML = '<div class="ag-load"><i></i><i></i><i></i><span>正在读…</span></div>';
+    _caTranslate(box);
+  }
   let r = null;
   try { r = await SoduWorkAPI.myGit(); } catch (e) { r = null; }
   if (seq !== _caLoadSeq || !_caCurrent(epoch, owner) ||
@@ -105,6 +134,7 @@ async function _caLoad() {
       '<button class="btn-mini" id="caRetry">重试</button></div>';
     const rb = document.getElementById('caRetry');
     if (rb) rb.addEventListener('click', _caLoad);
+    _caTranslate(box);
     return;
   }
   _caData = r;
@@ -159,6 +189,7 @@ function _caRender() {
 
   _caBind(box);
   _caMark();
+  _caTranslate(box);
 }
 
 function _caNavItem(key, title, summary, stateText, state) {
@@ -368,11 +399,11 @@ async function _caDoTest() {
     const r = await SoduWorkAPI.testMyGit(url);
     if (!_caCurrent(epoch, owner)) return;
     _caTest = url === _caUrl && revision === _caEditRevision ?
-      { state: r && r.ok ? 'ok' : 'bad', detail: (r && r.detail) || '没测出结果' } : null;
+      { state: r && r.ok ? 'ok' : 'bad', detail: _caText((r && r.detail) || '没测出结果') } : null;
   } catch (e) {
     if (!_caCurrent(epoch, owner)) return;
     _caTest = url === _caUrl && revision === _caEditRevision ? { state: 'bad',
-                detail: (typeof _humanErr === 'function' ? _humanErr(e, '没测成') : '没测成') } : null;
+                detail: _caError(e, '没测成') } : null;
   } finally {
     if (_caTesting === operation) {
       if (!_caCurrent(epoch, owner)) _caTest = null;
@@ -399,7 +430,7 @@ async function _caSave() {
   } catch (e) {
     if (!_caCurrent(epoch, owner)) return;
     if (typeof petSay === 'function') {
-      petSay(typeof _humanErr === 'function' ? _humanErr(e, '没存上') : '没存上');
+      petSay(_caError(e, '没存上'));
     }
   } finally {
     _caEndOperation('save', operation);

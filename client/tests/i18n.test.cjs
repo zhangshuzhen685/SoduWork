@@ -346,6 +346,38 @@ test('cloud environment UI translates complete messages while preserving command
   c.api.setLocale('zh-CN');
   assert.equal(c.api.translateText('云端环境'), '云端环境');
 });
+test('runner connectivity and code-account validation errors translate in every supported locale', () => {
+  const c = client();
+  const runner = '\u672c\u673a Runner \u65e0\u6cd5\u8fde\u63a5\u540e\u53f0\uff0c\u8bf7\u68c0\u67e5\u7f51\u7edc\u8fde\u63a5\uff1b\u6062\u590d\u540e\u4f1a\u81ea\u52a8\u91cd\u8fde\u3002';
+  const email = '\u90ae\u7bb1\u683c\u5f0f\u4e0d\u5bf9\uff08git \u4f1a\u628a\u5b83\u539f\u6837\u5199\u8fdb\u6bcf\u4e00\u6761\u63d0\u4ea4\u91cc\uff09';
+  c.api.setLocale('en-US');
+  assert.match(c.api.translateText(runner), /local Runner cannot connect/i);
+  assert.match(c.api.translateText(email), /email format is invalid/i);
+  for (const locale of ['ja-JP', 'ko-KR']) {
+    c.api.setLocale(locale);
+    assert.notEqual(c.api.translateText(runner), runner, locale);
+    assert.notEqual(c.api.translateText(email), email, locale);
+  }
+  c.api.setLocale('zh-CN');
+  assert.equal(c.api.translateText(runner), runner);
+  assert.equal(c.api.translateText(email), email);
+});
+
+test('composer workspace inheritance markers translate in all supported locales', () => {
+  const c = client();
+  const markers = ['（沿用上一会话）', '（沿用上次选择）', '沿用上一会话', '沿用上次选择'];
+  c.api.setLocale('en-US');
+  assert.deepEqual(markers.map(value => c.api.translateText(value)), [
+    ' (from previous chat)', ' (from last choice)', 'from previous chat', 'from last choice',
+  ]);
+  for (const locale of ['ja-JP', 'ko-KR']) {
+    c.api.setLocale(locale);
+    for (const value of markers) assert.notEqual(c.api.translateText(value), value, locale + ': ' + value);
+  }
+  c.api.setLocale('zh-CN');
+  assert.deepEqual(markers.map(value => c.api.translateText(value)), markers);
+});
+
 test('complete dynamic templates retain data and safely escape HTML parameters', () => {
   const c = client(); c.api.setLocale('en-US');
   assert.equal(c.api.translateText('当前模型不接受图片输入，请切换支持图片的模型或启用视觉适配'),

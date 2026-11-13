@@ -141,6 +141,14 @@
     '两次输入的密码不一致。': '入力したパスワードが一致しません。',
     '密码已重置，请用新密码登录。': 'パスワードを再設定しました。新しいパスワードでサインインしてください。',
     '验证成功，正在进入工作区…': '認証しました。ワークスペースを開いています…',
+    "邮箱格式不对（git 会把它原样写进每一条提交里）": "メールアドレスの形式が正しくありません（Git は各コミットにそのまま記録します）。",
+    "请填写此字段。": "この項目を入力してください。",
+    "请输入有效的地址。": "有効なアドレスを入力してください。",
+    "请输入有效的值。": "有効な値を入力してください。",
+    '（沿用上一会话）': '（前回の会話を使用）',
+    '（沿用上次选择）': '（前回の選択を使用）',
+    '沿用上一会话': '前回の会話を使用',
+    '沿用上次选择': '前回の選択を使用',
   };
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'ja-JP': Object.freeze(messages) }));

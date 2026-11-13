@@ -657,7 +657,15 @@
     "验证日常执行与完整回复；会使用所选模型额度，最多 3 分钟。": "Checks everyday execution and a complete reply. This uses your selected model's quota and takes up to 3 minutes.",
     "日常对话通过 OpenCode 直接执行；Google Research Harness² 的实验性推演仅用于显式诊断。": "Everyday conversations execute directly through OpenCode; Google Research Harness² experimental refinement runs only in explicit diagnostics.",
     "直接使用「我的模型」中选定的企业模型；模型凭据仅注入本次进程，不写入文件。": "Uses the enterprise model selected in My Models. Model credentials are provided only to the current process and are not written to files.",
-    "Harness² 核心随 SoduWork 内置；首次使用时点「装上」准备执行组件。": "The Harness² core is bundled with SoduWork. Before first use, click Install to prepare the execution component."
+    "Harness² 核心随 SoduWork 内置；首次使用时点「装上」准备执行组件。": "The Harness² core is bundled with SoduWork. Before first use, click Install to prepare the execution component.",
+    "本机 Runner 的设备登记未通过，请重新登录后重试。": "The local Runner device registration was not accepted. Sign in again and retry.",
+    "本机 Runner 已启动，但后台尚未确认上线，正在自动重连。": "The local Runner has started, but the service has not confirmed it yet. Reconnecting automatically.",
+    "本机 Runner 无法连接后台，请检查网络连接；恢复后会自动重连。": "The local Runner cannot connect to the service. Check the network connection; it will reconnect automatically when connectivity returns.",
+    "升级后的设备身份与旧 Runner 登记不一致，正在恢复本机连接。": "The upgraded device identity does not match the previous Runner registration. Restoring the local connection.",
+    "本机 Runner 无法保存设备身份，请检查客户端数据目录的写入权限和磁盘空间。": "The local Runner cannot save its device identity. Check write access and free disk space for the client data directory.",
+    "本机 Runner 身份恢复失败，请联系管理员检查设备登记。": "The local Runner could not restore its identity. Ask an administrator to check the device registration.",
+    "本机 Runner 尚未启动，请检查客户端的工作目录设置后重新打开客户端。": "The local Runner has not started. Check the client's work-directory setting and reopen the client.",
+    "本机 Runner 正在连接后台，连接成功后会自动显示可用 Agent。": "The local Runner is connecting to the service. Available Agents will appear after it connects.",
   };
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'en-US': Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages['en-US'], messages)) }));

@@ -542,6 +542,10 @@
     '还没有聊天': 'No chats yet', '适用于本机 Ollama、vLLM 等可信服务': 'For trusted local services such as Ollama or vLLM',
     '默认参数 JSON，例如 {"size":"1024x1024"}': 'Default parameters as JSON, e.g. {"size":"1024x1024"}',
     '默认生成参数': 'Default generation parameters', '＋ 添加服务': '＋ Add service',
+    "邮箱格式不对（git 会把它原样写进每一条提交里）": "The email format is invalid (Git writes it exactly into every commit).",
+    "请填写此字段。": "Please fill out this field.",
+    "请输入有效的地址。": "Enter a valid address.",
+    "请输入有效的值。": "Enter a valid value.",
   });
   Object.assign(messages, { '插件': 'Plugins', '技能': 'Skills', '工具': 'Tools', '能力': 'Capabilities', '模型': 'Models', '智能体': 'Agent' });
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }

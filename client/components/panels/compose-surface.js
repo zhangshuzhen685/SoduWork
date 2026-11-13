@@ -525,13 +525,13 @@ function _paintSetup() {
     const permissionName = document.getElementById('cpPermissionName');
     const abilityName = document.getElementById('cpAbilityName');
     if (workspaceName) {
-      const sourceSuffix = ctx._workspace.direct && ctx._workspace.workspaceSource === 'last-session' ? '（沿用上一会话）'
-        : ctx._workspace.direct && ctx._workspace.workspaceSource === 'recent' ? '（沿用上次选择）' : '';
+      const sourceSuffix = ctx._workspace.direct && ctx._workspace.workspaceSource === 'last-session' ? _uiText('（沿用上一会话）')
+        : ctx._workspace.direct && ctx._workspace.workspaceSource === 'recent' ? _uiText('（沿用上次选择）') : '';
       workspaceName.textContent = (ctx._workspace.direct ? ctx._workspace.name : '默认工作区') + sourceSuffix;
     }
     if (workspaceButton) {
-      const sourceNote = ctx._workspace.direct && ctx._workspace.workspaceSource === 'last-session' ? '沿用上一会话'
-        : ctx._workspace.direct && ctx._workspace.workspaceSource === 'recent' ? '沿用上次选择' : '';
+      const sourceNote = ctx._workspace.direct && ctx._workspace.workspaceSource === 'last-session' ? _uiText('沿用上一会话')
+        : ctx._workspace.direct && ctx._workspace.workspaceSource === 'recent' ? _uiText('沿用上次选择') : '';
       workspaceButton.title = ctx._workspace.direct
         ? '本次会话直接使用：' + ctx._workspace.dir +
           (sourceNote ? '（' + sourceNote + '；点开可改回默认工作区）' : '')

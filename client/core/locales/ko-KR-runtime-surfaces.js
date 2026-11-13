@@ -336,6 +336,14 @@
     '\u672c\u6b21\u9884\u7ea6\u5df2\u89e6\u53d1': '\uc774 \uc608\uc57d\uc740 \uc774\ubbf8 \uc2e4\ud589\ub418\uc5c8\uc2b5\ub2c8\ub2e4',
     '\u672c\u6b21\u9884\u7ea6\u5df2\u89e6\u53d1\uff1b\u4fee\u6539\u4e3a\u5c06\u6765\u65f6\u95f4\u53ef\u91cd\u65b0\u9884\u7ea6': '\uc774 \uc608\uc57d\uc740 \uc774\ubbf8 \uc2e4\ud589\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uc608\uc815\ub41c \ubbf8\ub798 \uc2dc\uac04\uc73c\ub85c \ubc14\uafb8\uba74 \ub2e4\uc2dc \uc608\uc57d\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4',
     '\u5230\u70b9\u89e6\u53d1\u4e00\u6b21\uff1b\u5931\u8d25\u6309\u8bbe\u7f6e\u91cd\u8bd5': '\uc9c0\uc815\ud55c \uc2dc\uac04\uc5d0 1\ud68c \uc2e4\ud589\ud558\uace0, \uc2e4\ud328\ud55c \uc2e4\ud589\uc740 \uc7ac\uc2dc\ub3c4 \uc124\uc815\uc744 \ub530\ub985\ub2c8\ub2e4',
+    '本机 Runner 无法连接后台，请检查网络连接；恢复后会自动重连。' : '로컬 Runner가 서비스에 연결할 수 없습니다. 네트워크 연결을 확인하세요. 연결이 복구되면 자동으로 다시 연결합니다.',
+    "本机 Runner 的设备登记未通过，请重新登录后重试。": "로컬 Runner 기기 등록이 승인되지 않았습니다. 다시 로그인한 후 시도하세요.",
+    "本机 Runner 已启动，但后台尚未确认上线，正在自动重连。": "로컬 Runner가 시작되었지만 서비스에서 아직 확인하지 못했습니다. 자동으로 다시 연결합니다.",
+    "升级后的设备身份与旧 Runner 登记不一致，正在恢复本机连接。": "업그레이드된 기기 ID가 이전 Runner 등록과 일치하지 않습니다. 로컬 연결을 복구하는 중입니다.",
+    "本机 Runner 无法保存设备身份，请检查客户端数据目录的写入权限和磁盘空间。": "로컬 Runner가 기기 ID를 저장할 수 없습니다. 클라이언트 데이터 디렉터리의 쓰기 권한과 디스크 여유 공간을 확인하세요.",
+    "本机 Runner 身份恢复失败，请联系管理员检查设备登记。": "로컬 Runner ID를 복구하지 못했습니다. 관리자에게 기기 등록을 확인해 달라고 요청하세요.",
+    "本机 Runner 尚未启动，请检查客户端的工作目录设置后重新打开客户端。": "로컬 Runner가 시작되지 않았습니다. 클라이언트 작업 디렉터리 설정을 확인한 후 다시 여세요.",
+    "本机 Runner 正在连接后台，连接成功后会自动显示可用 Agent。": "로컬 Runner가 서비스에 연결 중입니다. 연결되면 사용할 수 있는 Agent가 표시됩니다.",
   };
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'ko-KR': Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages?.['ko-KR'], messages)) }));

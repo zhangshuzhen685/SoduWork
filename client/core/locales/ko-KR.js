@@ -141,6 +141,14 @@
     '两次输入的密码不一致。': '입력한 비밀번호가 일치하지 않습니다.',
     '密码已重置，请用新密码登录。': '비밀번호를 재설정했습니다. 새 비밀번호로 로그인하세요.',
     '验证成功，正在进入工作区…': '인증되었습니다. 작업 공간을 여는 중…',
+    "邮箱格式不对（git 会把它原样写进每一条提交里）": "이메일 형식이 올바르지 않습니다(Git이 모든 커밋에 그대로 기록합니다).",
+    "请填写此字段。": "이 필드를 입력하세요.",
+    "请输入有效的地址。": "유효한 주소를 입력하세요.",
+    "请输入有效的值。": "유효한 값을 입력하세요.",
+    '（沿用上一会话）': '（이전 대화 사용）',
+    '（沿用上次选择）': '（마지막 선택 사용）',
+    '沿用上一会话': '이전 대화 사용',
+    '沿用上次选择': '마지막 선택 사용',
   };
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'ko-KR': Object.freeze(messages) }));

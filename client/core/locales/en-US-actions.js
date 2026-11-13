@@ -31,6 +31,7 @@
     '当前没有可以开始的任务': "No issues available to start", '任务不存在': "Issue not found", '任务会话未能打开': "Could not open the issue chat", '这次工作': 'This work',
     '这件事值得持续跟踪': 'Track this as ongoing work', '本次对话不再提示': 'Do not show again in this chat', '注释': 'Annotations', '默认工作区': 'Default workspace',
     '（沿用上一会话）': ' (from previous chat)', '（沿用上次选择）': ' (from last choice)',
+    '沿用上一会话': 'from previous chat', '沿用上次选择': 'from last choice',
     '选择本次会话的工作位置': 'Choose where to work for this chat', '设置本次会话的权限': 'Set permissions for this chat', '检查中': 'Checking', '选择本次会话使用的能力': 'Choose capabilities for this chat',
     '本次会话在哪儿工作': 'Where should this chat work?', '选择现有文件夹': 'Choose an existing folder', '本次会话权限': 'Chat permissions', '可以读写文件和执行命令': 'Can read and write files and run commands',
     '按需启用本次会话能力': 'Enable capabilities for this chat as needed', '正在检查这台电脑…': 'Checking this computer…', '添加业务能力或调整运行设置': 'Add capabilities or adjust runtime settings',

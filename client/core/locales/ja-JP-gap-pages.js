@@ -2537,6 +2537,8 @@
     '本次对话不再提示': 'この会話では今後表示しません',
     '注释': '注釈',
     '默认工作区': 'デフォルトワークスペース',
+    '（沿用上一会话）': '（前回のチャットを引き継ぐ）', '（沿用上次选择）': '（前回の選択を引き継ぐ）',
+    '沿用上一会话': '前回のチャットを引き継ぐ', '沿用上次选择': '前回の選択を引き継ぐ',
     '选择本次会话的工作位置': 'この会話の作業場所を選択',
     '设置本次会话的权限': 'この会話の権限を設定',
     '检查中': 'チェック中',
@@ -8373,6 +8375,11 @@
     'Runner 安装已完成': 'Runner のインストールが完了しました',
     'SSH 连接已验证；Runner 是否在线以下方检查结果为准。': 'SSH 接続は確認済みです。Runner のオンライン状態は下の接続確認結果をご覧ください。',
     '插件参数过长，请缩短后重试': 'プラグインの入力が長すぎます。短くして再試行してください。',
+    "例如 192.0.2.20 或 dev.example.com": "例: 192.0.2.20 または dev.example.com",
+    "例如：我的开发电脑": "例: 開発用コンピューター",
+    "请填写此字段。": "この項目を入力してください。",
+    "请输入有效的地址。": "有効なアドレスを入力してください。",
+    "请输入有效的值。": "有効な値を入力してください。",
   });
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'ja-JP': Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages['ja-JP'], messages)) }));

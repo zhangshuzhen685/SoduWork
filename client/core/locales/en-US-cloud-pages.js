@@ -254,6 +254,11 @@
     'Runner 安装已完成': 'Runner installation completed',
     'SSH 连接已验证；Runner 是否在线以下方检查结果为准。': 'SSH access is verified; Runner availability is shown by the connection check below.',
     '插件参数过长，请缩短后重试': 'Plugin inputs are too long. Shorten them and try again.',
+    "例如 192.0.2.20 或 dev.example.com": "For example, 192.0.2.20 or dev.example.com",
+    "例如：我的开发电脑": "For example: My development computer",
+    "请填写此字段。": "Please fill out this field.",
+    "请输入有效的地址。": "Enter a valid address.",
+    "请输入有效的值。": "Enter a valid value.",
   });
   if (typeof module !== 'undefined' && module.exports) { module.exports = Object.freeze(messages); return; }
   global.SoduWorkLocaleMessages = Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages, { 'en-US': Object.freeze(Object.assign(Object.create(null), global.SoduWorkLocaleMessages['en-US'], messages)) }));

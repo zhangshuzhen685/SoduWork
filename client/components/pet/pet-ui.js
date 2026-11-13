@@ -6,15 +6,19 @@
 /* Convert exceptions to readable messages; retain raw error objects in the console only. */
 function _humanErr(e, fallback) {
   try { console.error('[SoduWork]', e); } catch (_e) {}
+  const translate = value => {
+    const text = String(value || '');
+    try { return window.SoduWorkI18n?.translateText?.(text) || text; } catch (_) { return text; }
+  };
   const m = String((e && e.message) || e || '');
   const detail = String((e && e.detail) || '').trim();
-  if (/failed to fetch|networkerror|econn|network|fetch/i.test(m)) return fallback || '网络不太顺，稍后再试';
-  if (/\b(401|403)\b|unauthor|forbid/i.test(m)) return '没权限或登录过期了';
-  if (/\b404\b|not.?found/i.test(m)) return fallback || '没找到，可能已被改动';
-  if (/\b413\b|too large/i.test(m)) return '文件太大了';
-  if (detail) return detail.slice(0, 240);
-  if ((e && e.status) && m && !/^HTTP\s+\d+$/i.test(m)) return m.slice(0, 240);
-  return fallback || '操作没成功，稍后再试';
+  if (/failed to fetch|networkerror|econn|network|fetch/i.test(m)) return translate(fallback || '网络不太顺，稍后再试');
+  if (/\b(401|403)\b|unauthor|forbid/i.test(m)) return translate('没权限或登录过期了');
+  if (/\b404\b|not.?found/i.test(m)) return translate(fallback || '没找到，可能已被改动');
+  if (/\b413\b|too large/i.test(m)) return translate('文件太大了');
+  if (detail) return translate(detail.slice(0, 240));
+  if ((e && e.status) && m && !/^HTTP\s+\d+$/i.test(m)) return translate(m.slice(0, 240));
+  return translate(fallback || '操作没成功，稍后再试');
 }
 
 /* Speech bubbles. */
