@@ -67,16 +67,20 @@
     }
   }
 
+  function reasonText(reason) {
+    if (typeof reason === 'string') return reason;
+    return text(reason && (reason.error || reason.message || reason.reason));
+  }
+
   function isConnectionFailure(reason) {
-    var raw = text(reason && (reason.error || reason.message || reason.reason));
+    var raw = reasonText(reason);
     return /fetch failed|failed to fetch|econnrefused|connection refused|networkerror|network error|timed? ?out|\u8fde\u63a5\u8d85\u65f6|\u65e0\u6cd5\u8fde\u63a5/.test(raw.toLowerCase());
   }
 
   function connectionMessage(reason) {
-    var detail = reason || {};
-    var raw = text(detail.error || detail.message || detail.reason);
-    if (!isConnectionFailure(detail)) return raw;
-    return '暂时无法连接 SoduWork 服务。请检查网络后重试。';
+    var raw = reasonText(reason);
+    if (!isConnectionFailure(raw)) return raw;
+    return '暂时无法连接 SoduWork 服务，请检查网络后重试。';
   }
 
   /*
@@ -208,7 +212,7 @@
 
   function setStatus(message, kind) {
     if (!statusNode) return;
-    statusNode.textContent = text(message);
+    statusNode.textContent = translate(text(message));
     statusNode.className = 'soduwork-auth-status' + (kind ? ' is-' + kind : '');
   }
 

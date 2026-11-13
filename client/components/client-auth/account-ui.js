@@ -4,8 +4,11 @@
     ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   const email = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim()) && String(value).length <= 254;
   const code = value => /^\d{6}$/.test(String(value || ''));
+  const isConnectionFailure = value => /fetch failed|failed to fetch|econnrefused|connection refused|networkerror|network error|timed? ?out|连接超时|无法连接/i.test(String(value || ''));
   function error(value) {
-    return String(value && (value.error || value.message || value.reason) || '操作未完成，请重试');
+    const candidate = value && (value.error || value.message || value.reason);
+    const message = String(candidate || (typeof value === 'string' ? value : '操作未完成，请重试'));
+    return isConnectionFailure(message) ? '暂时无法连接 SoduWork 服务，请检查网络后重试。' : message;
   }
   function check(result) {
     if (!result || result.ok === false) throw Object.assign(Error(error(result)), result || {});

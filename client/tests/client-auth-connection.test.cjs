@@ -14,6 +14,11 @@ const emailSource = fs.readFileSync(
   path.resolve(__dirname, '..', 'components', 'client-auth', 'email-auth.js'),
   'utf8',
 );
+const accountUiSource = fs.readFileSync(
+  path.resolve(__dirname, '..', 'components', 'client-auth', 'account-ui.js'),
+  'utf8',
+);
+const localeDir = path.resolve(__dirname, '..', 'core', 'locales');
 
 function runtime(config) {
   const document = {
@@ -42,6 +47,37 @@ test('connection failures explain network recovery without offering an environme
     assert.match(message, /\u68c0\u67e5\u7f51\u7edc/);
     assert.doesNotMatch(message, /fetch failed|127\.0\.0\.1|\u672c\u673a\u670d\u52a1|\u66f4\u6539\u670d\u52a1/);
   }
+});
+
+test('connection messages normalize raw fetch failures before localization', () => {
+  const auth = runtime({ environment: 'production', hub: 'https://hub.example.test' });
+  const expected = '暂时无法连接 SoduWork 服务，请检查网络后重试。';
+  for (const reason of ['fetch failed', { error: 'TypeError: fetch failed' }, { message: 'Failed to fetch' }]) {
+    assert.equal(auth.connectionMessage(reason), expected);
+  }
+  assert.equal(auth.connectionMessage({ error: '账号或密码错误' }), '账号或密码错误');
+});
+
+test('account action errors turn network failures into a localizable message', () => {
+  const window = {};
+  vm.runInNewContext(accountUiSource, { window });
+  const expected = '暂时无法连接 SoduWork 服务，请检查网络后重试。';
+  for (const reason of ['fetch failed', { error: 'TypeError: fetch failed' }, { message: 'Failed to fetch' }]) {
+    assert.equal(window.AccountUI.error(reason), expected);
+  }
+  assert.equal(window.AccountUI.error({ error: '账号或密码错误' }), '账号或密码错误');
+});
+
+test('normalized connection copy is translated in every supported non-Chinese locale', () => {
+  const context = { globalThis: {}, console };
+  for (const file of ['en-US.js', 'en-US-workspace.js', 'ja-JP.js', 'ja-JP-gap-pages.js', 'ko-KR.js', 'ko-KR-gap-pages.js']) {
+    vm.runInNewContext(fs.readFileSync(path.join(localeDir, file), 'utf8'), context, { filename: file });
+  }
+  const source = '暂时无法连接 SoduWork 服务，请检查网络后重试。';
+  const catalogs = context.globalThis.SoduWorkLocaleMessages;
+  assert.equal(catalogs['en-US'][source], 'Cannot connect to SoduWork. Check your network and try again.');
+  assert.equal(catalogs['ja-JP'][source], 'SoduWork サービスに接続できません。ネットワークを確認して再試行してください。');
+  assert.equal(catalogs['ko-KR'][source], 'SoduWork 서비스에 연결할 수 없습니다. 네트워크를 확인 후 다시 시도하세요.');
 });
 
 test('credential errors remain server-provided instead of being mislabeled as connectivity failures', () => {

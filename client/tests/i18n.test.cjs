@@ -138,6 +138,21 @@ test('issue creation and delivery surfaces localize tag, assignment and status c
   }
 });
 
+test('login network failures use localized recovery copy in every supported locale', () => {
+  const c = client();
+  const source = '暂时无法连接 SoduWork 服务，请检查网络后重试。';
+  const expected = {
+    'zh-CN': source,
+    'en-US': 'Cannot connect to SoduWork. Check your network and try again.',
+    'ja-JP': 'SoduWork サービスに接続できません。ネットワークを確認して再試行してください。',
+    'ko-KR': 'SoduWork 서비스에 연결할 수 없습니다. 네트워크를 확인 후 다시 시도하세요.',
+  };
+  for (const [locale, message] of Object.entries(expected)) {
+    c.api.setLocale(locale);
+    assert.equal(c.api.translateText(source), message, locale);
+  }
+});
+
 test('renderer catalog packages preserve frozen snapshots and match canonical package order', () => {
   const context = vm.createContext({}), expected = {};
   const directory = path.join(__dirname, '../core/locales');
